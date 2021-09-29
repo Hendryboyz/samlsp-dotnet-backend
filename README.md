@@ -1,4 +1,8 @@
 # samlsp-dotnet-backend
+> SAML service provider demonstrate in .NET
+
+* Downoload .NET [here](https://dotnet.microsoft.com/download/dotnet/5.0)
+* In this sample project, I use [ITfoxtec Identity SAML2](https://www.nuget.org/packages/ITfoxtec.Identity.Saml2) to implement the service provider.
 
 ## Commands
 ```bash
