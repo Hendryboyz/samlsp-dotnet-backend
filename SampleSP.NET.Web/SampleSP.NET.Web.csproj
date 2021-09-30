@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="ITfoxtec.Identity.Saml2" Version="4.7.0" />
+    <PackageReference Include="ITfoxtec.Identity.Saml2.MvcCore" Version="4.7.0" />
   </ItemGroup>
 
 </Project>
