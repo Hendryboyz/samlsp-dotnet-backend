@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Authentication;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using ITfoxtec.Identity.Saml2;
 using ITfoxtec.Identity.Saml2.MvcCore;
 using ITfoxtec.Identity.Saml2.Schemas;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -13,6 +12,7 @@ using SampleSP.NET.Web.Helpers;
 
 namespace SampleSP.NET.Web.Controllers
 {
+    [AllowAnonymous]
     [Route("auth")]
     public class AuthController : Controller
     {
@@ -24,6 +24,12 @@ namespace SampleSP.NET.Web.Controllers
         {
             _logger = logger;
             _config = configAccessor.Value;
+        }
+
+        [HttpGet("redirect")]
+        public IActionResult Bye()
+        {
+            return Redirect("~");
         }
 
         [HttpGet("entrypoint")]

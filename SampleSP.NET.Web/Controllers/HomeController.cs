@@ -28,6 +28,13 @@ namespace SampleSP.NET.Web.Controllers
             return View();
         }
 
+        public IActionResult Greeting()
+        {
+            return new OkObjectResult(new {
+                Message="Hello World !"
+            });
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
