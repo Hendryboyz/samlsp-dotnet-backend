@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Authentication;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ITfoxtec.Identity.Saml2;
 using ITfoxtec.Identity.Saml2.MvcCore;
@@ -37,7 +39,7 @@ namespace SampleSP.NET.Web.Controllers
             }).ToActionResult();
         }
 
-        [HttpGet("assertion-consumer-service")]
+        [HttpPost("assertion-consumer-service")]
         public async Task<IActionResult> AssertionConsumerService()
         {
             var binding = new Saml2PostBinding();
@@ -64,7 +66,7 @@ namespace SampleSP.NET.Web.Controllers
         public IActionResult Greeting()
         {
             return new OkObjectResult(new {
-                Message="Hello World !"
+                Message = "Hello World !"
             });
         }
     }

@@ -9,4 +9,9 @@
     <PackageReference Include="ITfoxtec.Identity.Saml2.MvcCore" Version="4.7.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Configs/appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Update="Configs/appsettings.Development.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

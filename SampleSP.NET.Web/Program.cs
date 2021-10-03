@@ -17,8 +17,8 @@ namespace SampleSP.NET.Web
                 {
                     config.Sources.Clear();
                     var env = hostingContext.HostingEnvironment;
-                    config.AddJsonFile("Configs/appsettins.json", optional: true, reloadOnChange: true)
-                        .AddJsonFile($"Configs/appsettins.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+                    config.AddJsonFile("Configs/appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile($"Configs/appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
                     config.AddEnvironmentVariables();
 
                     if (args != null)
