@@ -28,7 +28,10 @@ namespace SampleSP.NET.Web
                 X509Certificate2 idpCertificate = LoadCertificate(Configuration["Saml2:IdPCertificate"]);
                 config.SignatureValidationCertificates.Add(idpCertificate);
             });
-            services.AddSaml2(slidingExpiration: true);
+            services.AddSaml2(
+                loginPath: "/auth/entrypoint",
+                slidingExpiration: true
+            );
             services.AddControllersWithViews();
         }
 
