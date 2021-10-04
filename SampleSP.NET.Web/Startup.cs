@@ -60,6 +60,7 @@ namespace SampleSP.NET.Web
 
             app.UseRouting();
 
+            app.UseSaml2();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Authentication;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ITfoxtec.Identity.Saml2;
 using ITfoxtec.Identity.Saml2.MvcCore;
@@ -12,7 +14,6 @@ using SampleSP.NET.Web.Helpers;
 
 namespace SampleSP.NET.Web.Controllers
 {
-    [AllowAnonymous]
     [Route("auth")]
     public class AuthController : Controller
     {
@@ -26,12 +27,7 @@ namespace SampleSP.NET.Web.Controllers
             _config = configAccessor.Value;
         }
 
-        [HttpGet("redirect")]
-        public IActionResult Bye()
-        {
-            return Redirect("~");
-        }
-
+        [AllowAnonymous]
         [HttpGet("entrypoint")]
         public IActionResult Entrypoint(string returnUrl)
         {
@@ -45,6 +41,7 @@ namespace SampleSP.NET.Web.Controllers
             }).ToActionResult();
         }
 
+        [AllowAnonymous]
         [HttpPost("assertion-consumer-service")]
         public async Task<IActionResult> AssertionConsumerService()
         {
@@ -68,11 +65,19 @@ namespace SampleSP.NET.Web.Controllers
             return relayState.ContainsKey(RELAY_STATE_RETURN_URL) ? relayState[RELAY_STATE_RETURN_URL] : Url.Content("~/auth/greeting");
         }
 
+        [Authorize]
         [HttpGet("greeting")]
         public IActionResult Greeting()
         {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Redirect("~/auth/entrypoint");
+            }
+            var nameIdentifier = User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
+                                        .Select(c => c.Value).Single();
             return new OkObjectResult(new {
-                Message = "Hello World !"
+                Message = "Hello World !",
+                UserName = nameIdentifier
             });
         }
     }
